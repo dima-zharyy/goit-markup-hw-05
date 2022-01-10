@@ -1,8 +1,8 @@
 /* Глобальные свойства */
 
-/* * {
+* {
   outline: 1px solid tomato;
-} */
+}
 
 :root {
   --logo-color: #2196f3;
@@ -181,7 +181,19 @@ img {
 
 /* Обычно так не делается, обещали позже научить */
 .current {
+  position: relative;
   color: var(--accent-color);
+}
+
+.current::after {
+  content: '';
+  position: absolute;
+  bottom: -33.5px;
+  width: 100%;
+  height: 4px;
+  background-color: var(--accent-color);
+  border-radius: 2px;
+  pointer-events: none;
 }
 
 /* Герой */
@@ -290,6 +302,10 @@ img {
   padding-top: 0;
 }
 
+.process-list {
+  display: flex;
+}
+
 .process-title {
   margin-bottom: 50px;
 
@@ -299,12 +315,30 @@ img {
   letter-spacing: 0.03em;
 }
 
-.process-item:not(:nth-child(3n)) {
-  margin-right: 30px;
+.process-item {
+  position: relative;
 }
 
-.process-list {
-  display: flex;
+.process-item-title {
+  position: absolute;
+  bottom: 0;
+
+  width: 100%;
+  padding-top: 27px;
+  padding-bottom: 27px;
+
+  font-size: 14px;
+  line-height: 1.14;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-align: center;
+
+  background: rgba(47, 48, 58, 0.8);
+  color: var(--primary-white-color);
+}
+
+.process-item:not(:nth-child(3n)) {
+  margin-right: 30px;
 }
 
 /* Команда */
@@ -531,6 +565,44 @@ img {
   padding-left: 24px;
 }
 
+.gallery-img-thumb {
+  position: relative;
+}
+
+.gallery-desc-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 322px;
+  height: auto;
+
+  font-size: 18px;
+  line-height: 1.56;
+  letter-spacing: 0.03em;
+
+  color: var(--primary-white-color);
+  opacity: 0;
+}
+
+.gallery-link:hover .gallery-img-thumb::before,
+.gallery-link:focus .gallery-img-thumb::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(33, 150, 243, 0.9);
+}
+
+.gallery-link:hover .gallery-desc-overlay,
+.gallery-link:focus .gallery-desc-overlay {
+  opacity: 1;
+}
+
 /* Подвал сайта */
 .footer {
   padding-top: 60px;
@@ -638,4 +710,53 @@ img {
 .social-link:hover,
 .social-link:focus {
   background-color: var(--accent-color);
+}
+
+/* Модальное окно */
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  min-width: 528px;
+  min-height: 581px;
+
+  background: var(--primary-title-color);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.close-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+
+  background: var(--primary-white-color);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
 }
